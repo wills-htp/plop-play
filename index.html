@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plop Playtest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="scene" aria-hidden="true"></div>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark"><span class="s">P</span>..<span class="e">P</span></span> Plop <span class="muted">playtest</span></div>
+    <div class="online-bar" id="online-bar" hidden></div>
+    <div class="hints muted">
+      <kbd>1</kbd>–<kbd>4</kbd> switch phone · type a letter + <kbd>Enter</kbd> to lock in ·
+      <kbd>Tab</kbd> hops between answer boxes · <kbd>Enter</kbd> = host's next step
+    </div>
+  </header>
+
+  <div class="landing" id="landing">
+    <div class="landing-card">
+      <div class="landing-logo"><span class="s">P</span>..<span class="e">P</span></div>
+      <h1>Plop</h1>
+      <p class="muted">Say a letter together, then race to find a word that starts with one and ends with the other.</p>
+      <div class="step" id="step-room">
+        <label class="field"><span>Room name</span><input id="room-name" maxlength="40" placeholder="e.g. tuesday-crew" autocomplete="off" spellcheck="false"></label>
+        <button class="btn primary block" id="room-next">Next</button>
+      </div>
+      <div class="step" id="step-you" hidden>
+        <div class="muted small">Room <b id="room-label"></b> · <button type="button" class="linkish" id="room-back">change</button></div>
+        <label class="field"><span>Your name</span><input id="online-name" maxlength="16" autocomplete="nickname" spellcheck="false"></label>
+        <div class="themes-label">Theme <span class="muted small">· if you're opening the room (joiners get its theme)</span></div>
+        <div class="themes" id="theme-pick"></div>
+        <button class="btn primary block" id="enter-room">Enter room</button>
+      </div>
+      <p class="muted small" id="online-note"></p>
+    </div>
+  </div>
+
+  <main class="stage">
+    <section class="phones" id="phones" aria-label="Player phones"></section>
+
+    <aside class="panel" id="panel" aria-label="Table controls">
+      <section class="card">
+        <h2>Game</h2>
+        <div id="game-status" class="status"></div>
+        <div class="row wrap" id="game-buttons"></div>
+        <div id="round-info"></div>
+      </section>
+
+      <section class="card">
+        <h2>Seats <span class="muted small">left → right</span></h2>
+        <div id="seats"></div>
+        <div class="row wrap">
+          <button class="btn small" data-panel="addPhone">+ Phone</button>
+          <button class="btn small" data-panel="addBot">+ Bot</button>
+          <button class="btn small ghost" data-panel="resetRoles">Reset roles</button>
+        </div>
+        <p class="muted small" id="seats-note"></p>
+      </section>
+
+      <section class="card">
+        <h2>Rules</h2>
+        <div class="row wrap">
+          <button class="btn small ghost" data-preset="classic">Classic</button>
+          <button class="btn small ghost" data-preset="sandwich">Sandwich</button>
+          <button class="btn small ghost" data-preset="frenzy">Frenzy</button>
+          <button class="btn small ghost" data-preset="mix">Mix</button>
+        </div>
+        <div id="rules"></div>
+      </section>
+
+      <section class="card">
+        <h2>Scoring</h2>
+        <div id="scoring"></div>
+        <div class="preview">
+          <label class="field"><span>Try a word</span><input id="preview-word" placeholder="e.g. statement" autocomplete="off" spellcheck="false"></label>
+          <div id="preview-out" class="small"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Feel</h2>
+        <div id="feel"></div>
+      </section>
+
+      <section class="card">
+        <h2>All-time standings <span class="muted small">across every game</span></h2>
+        <div id="standings"></div>
+        <div class="row"><button class="btn small ghost" data-panel="clearStandings">Clear standings</button></div>
+      </section>
+
+      <section class="card">
+        <h2>Log</h2>
+        <ol id="log" class="log"></ol>
+        <div class="row"><button class="btn small ghost" data-panel="exportData">Export play data</button></div>
+        <p class="muted small" style="margin:0">Every round's words and times, saved in this browser to build bots from real play later.</p>
+      </section>
+    </aside>
+  </main>
+
+  <script src="data/words.js"></script>
+  <script src="data/more-words.js"></script>
+  <script src="data/syllables.js"></script>
+  <script src="data/frequency.js"></script>
+  <script src="scenes.js"></script>
+  <script src="engine.js"></script>
+  <script src="app.js"></script>
+  <script src="show.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+  <script src="peerroom.js"></script>
+  <script src="online.js"></script>
+  <script src="stats.js"></script>
+</body>
+</html>
